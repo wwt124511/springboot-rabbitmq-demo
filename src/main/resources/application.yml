@@ -7,7 +7,7 @@ spring:
     host: 127.0.0.1
     port: 5672
     username: admin
-    password: password
+    password: 123456
     #开启消息二次确认，开启消息生产者到交换机的确认机制。可靠性投递
     #publisher-confirms: true
     listener:

@@ -20,4 +20,5 @@ public class UserDTO implements Serializable {
     private String userName;
 
     private Integer age;
+
 }

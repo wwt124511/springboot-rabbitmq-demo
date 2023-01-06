@@ -2,6 +2,7 @@ package com.wwt.springbootrabbitmqdemo.controller;
 
 import com.wwt.springbootrabbitmqdemo.dto.UserDTO;
 import com.wwt.springbootrabbitmqdemo.rabbitmq.TestMqConfig;
+import com.wwt.springbootrabbitmqdemo.util.JsonUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +42,28 @@ public class RabbitmqController {
     }
 
 
-    @PostMapping("mqObject")
+    @PostMapping("mqObjectJson")
     @ResponseBody
-    public Object mqObject(){
+    public Object mqObjectJson(){
         UserDTO user = new UserDTO("王文涛", 20);
-        rabbitTemplate.convertAndSend(TestMqConfig.COCO_EXCHANGE_01, TestMqConfig.COCO_KEY_01, user);
+        rabbitTemplate.convertAndSend(TestMqConfig.COCO_EXCHANGE_02, TestMqConfig.COCO_KEY_02, JsonUtil.toJson(user));
         Map<String,Object> map = new HashMap<>();
         map.put("code", 200);
         map.put("msg", "成功");
         return map;
     }
+
+
+    @PostMapping("mqObject")
+    @ResponseBody
+    public Object mqObject(){
+        UserDTO user = new UserDTO("王文涛", 20);
+        rabbitTemplate.convertAndSend(TestMqConfig.COCO_EXCHANGE_03, TestMqConfig.COCO_KEY_03, user);
+        Map<String,Object> map = new HashMap<>();
+        map.put("code", 200);
+        map.put("msg", "成功");
+        return map;
+    }
+
+
 }
